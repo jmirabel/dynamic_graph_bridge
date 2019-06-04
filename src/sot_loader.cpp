@@ -142,7 +142,7 @@ void SotLoader::initializeRosNode(int argc, char *argv[])
 {
   SotLoaderBasic::initializeRosNode(argc, argv);
   //Temporary fix. TODO: where should nbOfJoints_ be initialized from?                         
-  if (ros::param::has("/sot/state_vector_map")) {
+  if (ros::param::has("/sot_controller/joint_names")) {
     angleEncoder_.resize(nbOfJoints_);
     angleControl_.resize(nbOfJoints_);
   }

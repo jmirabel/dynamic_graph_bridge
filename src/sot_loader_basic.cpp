@@ -83,21 +83,21 @@ int SotLoaderBasic::readSotVectorStateParam()
   std::map<std::string,std::string> from_parallel_name_to_state_vector_name;
   ros::NodeHandle n;
 
-  if (!ros::param::has("/sot/state_vector_map"))
+  if (!ros::param::has("/sot_controller/joint_names"))
     {
-      std::cerr<< " Read Sot Vector State Param " << std::endl;
+      std::cerr<< " Could not read param /sot_controller/joint_names" << std::endl;
       return 1;
     }
 
-  n.getParam("/sot/state_vector_map", stateVectorMap_);
+  n.getParam("/sot_controller/joint_names", stateVectorMap_);
   ROS_ASSERT(stateVectorMap_.getType() == XmlRpc::XmlRpcValue::TypeArray);
   nbOfJoints_ = stateVectorMap_.size();
   nbOfParallelJoints_ = 0;
 
-  if (ros::param::has("/sot/joint_state_parallel"))
+  if (ros::param::has("/sot_controller/joint_state_parallel"))
     {
       XmlRpc::XmlRpcValue joint_state_parallel;
-      n.getParam("/sot/joint_state_parallel", joint_state_parallel);
+      n.getParam("/sot_controller/joint_state_parallel", joint_state_parallel);
       ROS_ASSERT(joint_state_parallel.getType() == XmlRpc::XmlRpcValue::TypeStruct);
       std::cout << "Type of joint_state_parallel:" << joint_state_parallel.getType() << std::endl;
 
